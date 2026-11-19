@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EEBUS QR Block – Demo</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; background: #f4f6f8; color: #222; }
+  main { max-width: 640px; margin: 0 auto; padding: 24px 16px; display: flex; flex-direction: column; gap: 16px; }
+  .step { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  pre { background: #1e1e1e; color: #d4d4d4; padding: 12px; border-radius: 8px; font-size: 12px; overflow: auto; }
+  .samples { display: flex; gap: 12px; flex-wrap: wrap; } .samples figure { margin: 0; text-align: center; font-size: 12px; }
+  .samples img { width: 140px; }
+</style>
+</head>
+<body>
+<main>
+  <h2>Demo: EEBUS-QR-Code Journey Block</h2>
+  <div class="step">
+    <epilot-eebus-qr-scanner id="block"></epilot-eebus-qr-scanner>
+  </div>
+  <div class="step">
+    <strong>Wert, den der Block an die Journey übergibt (setValue):</strong>
+    <pre id="out">null</pre>
+  </div>
+  <div class="step">
+    <strong>Test-QR-Codes</strong> (mit dem Handy abscannen oder als Foto hochladen)
+    <div class="samples">
+      <figure><img src="sample-full.png"><figcaption>SHIP Pairing (voll)</figcaption></figure>
+      <figure><img src="sample-legacy.png"><figcaption>SHIP 1.0 (Wärmepumpe)</figcaption></figure>
+      <figure><img src="sample-wrong.png"><figcaption>Falscher QR-Code</figcaption></figure>
+    </div>
+  </div>
+</main>
+<script src="../dist/bundle.js"></script>
+<script>
+  // Simuliert den epilot-Journey-Wrapper: Props als Properties setzen
+  const el = document.getElementById('block')
+  el.required = true
+  el.args = { title: 'EEBUS-QR-Code der steuerbaren Verbrauchseinrichtung' }
+  el.setValue = (v) => { document.getElementById('out').textContent = JSON.stringify(v, null, 2) }
+</script>
+</body>
+</html>
